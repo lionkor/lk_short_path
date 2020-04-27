@@ -35,7 +35,7 @@ How it works
 2. Shorten all parts of the path to their first letter, except the last one.
 3. Append the last one in full. 
 
-### .bashrc
+## .bashrc
 
 You can use this in your bash prompt to make it look like this:
 
