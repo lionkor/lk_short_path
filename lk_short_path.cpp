@@ -21,7 +21,8 @@ int main() {
         path = "~" + path.substr(home.size());
     }
 
-    auto        splits = split(path, '/');
+    auto splits = split(path, '/');
+
     std::string short_path {};
     for (auto& str : splits) {
         if (str.size() == 0) {
