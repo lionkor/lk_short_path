@@ -6,7 +6,8 @@ path = os.getcwd()
 
 _HOME = os.getenv("HOME")
 
-path = path.replace(_HOME, "~")
+if path.startswith(_HOME):
+    path = path.replace(_HOME, "~")
 
 result = ""
 
