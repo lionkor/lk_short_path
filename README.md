@@ -11,7 +11,9 @@ A simple tool to displaying the current directory as a "short path".
 I personally use this for my shell's prompt (which is why I made it)! 
 Example of usage in a simple bash prompt:
 
-`~/s/d/src : master $ `
+`~/s/d/src $ `
+
+*See ".bashrc" section below for the code for this prompt!*
 
 ## Why
 
@@ -32,3 +34,16 @@ How it works
 1. Use the env var `HOME` and replace that part of the path (if it exists) with `~`.
 2. Shorten all parts of the path to their first letter, except the last one.
 3. Append the last one in full. 
+
+### .bashrc
+
+You can use this in your bash prompt to make it look like this:
+
+Example with path `~/src/game/Core/src`:
+
+`~/s/g/C/src $ `
+
+.bashrc:
+```bash
+export PS1="\[\033[32m\]\$(lk_short_path)\[\033[00m\] \$ "
+```
