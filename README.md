@@ -37,7 +37,7 @@ The idea is to create a middleground between only showing the basename (in this 
   ```bash
   g++ lk_short_path.cpp -o lk_short_path -O3 -std=c++17
   ```
-  (You might need to add `-lstd++fs` if it doesn't work!)
+  (You might need to add `-lstdc++fs` if it doesn't work!)
   
 → Copy or link `lk_short_path` to `/usr/bin/lk_short_path` or something
 
