@@ -6,9 +6,6 @@
 #include <cassert>
 #include <vector>
 
-static std::string replace(const std::string& str,
-    const std::string& to_replace, const std::string& with);
-
 static std::vector<std::string> split(const std::string& str, char c);
 
 int main() {
@@ -20,7 +17,9 @@ int main() {
     }
 
     std::string home = std::getenv("HOME");
-    path             = replace(path, home, "~");
+    if (path.substr(0, home.size()) == home) {
+        path = "~" + path.substr(home.size());
+    }
 
     auto        splits = split(path, '/');
     std::string short_path {};
@@ -35,20 +34,6 @@ int main() {
         }
     }
     std::cout << short_path;
-}
-
-static std::string replace(const std::string& str,
-    const std::string& to_replace, const std::string& with) {
-    std::string new_str;
-    for (std::size_t i = 0; i < str.size(); ++i) {
-        if (str.substr(i, to_replace.size()) == to_replace) {
-            new_str += with;
-            i += to_replace.size() - 1;
-        } else {
-            new_str += str[i];
-        }
-    }
-    return new_str;
 }
 
 static std::vector<std::string> split(const std::string& str, char c) {
