@@ -57,6 +57,20 @@ The output lacks a newline at the end on purpose, as it's **supposed to be used 
 2. Shorten all parts of the path to their first letter, except the last one.
 3. Append the last one in full. 
 
+## Contributing
+
+If you want to contribute, there are several things you can do which I always greatly appreciate:
+
+- New issues about features you'd like to see (please keep in mind that I try to follow the Unix philosophy with this project)
+- Any changes (PR's) that make the program faster, safer, more adaptable, etc
+- Documentation improvements
+
+#### TODO
+
+- [ ] Optionally accept a path as argument, otherwise behave as usual
+- [ ] Behave sanely if HOME isn't set
+- [ ] (C++) Speed up `split`
+
 ## .bashrc
 
 You can use this in your bash prompt to make it look like this:
