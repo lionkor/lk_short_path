@@ -8,6 +8,8 @@ A simple tool to displaying the current directory as a "short path". To be used 
 
 `/etc/systemd/network` → `/e/s/network`
 
+`/home/lion/.config/nvim` → `~/.c/nvim`
+
 I personally use this for my shell's prompt (which is why I made it)! 
 Example of usage in a simple bash prompt:
 
