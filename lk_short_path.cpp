@@ -30,7 +30,11 @@ int main() {
         } else if (str == splits.at(splits.size() - 1)) {
             short_path += str;
         } else {
-            short_path += str[0];
+            if (str.size() > 1 && str[0] == '.')
+                short_path += std::string(".") + str[1];
+            else {
+                short_path += str[0];
+            }
             short_path += "/";
         }
     }
