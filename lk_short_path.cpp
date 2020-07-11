@@ -5,15 +5,25 @@
 #include <utility>
 #include <cassert>
 #include <vector>
+#include <cassert>
+#include <sstream>
 
-static std::vector<std::string> split(const std::string& str, char c);
+static std::string shortened(std::string);
 
-int main() {
+int main(int argc, char** argv) {
     std::string path = std::filesystem::current_path();
 
+    std::cout << shortened(path) << std::endl;
+}
+
+static std::string shortened(std::string path) {
     if (path == "/") {
-        std::cout << path;
-        return 0;
+        return path;
+    }
+
+    // remove trailing slash
+    if (path.rfind('/') == path.size() - 1) {
+        path = path.substr(0, path.size() - 1);
     }
 
     std::string home = std::getenv("HOME");
@@ -21,37 +31,43 @@ int main() {
         path = "~" + path.substr(home.size());
     }
 
-    auto splits = split(path, '/');
+    // exit early if it's root ("/") or home ("~")
+    if (path == "/" || path == "~") {
+        return path;
+    }
 
-    std::string short_path {};
-    for (auto& str : splits) {
-        if (str.size() == 0) {
-            short_path += "/";
-        } else if (str == splits.at(splits.size() - 1)) {
-            short_path += str;
-        } else {
-            if (str.size() > 1 && str[0] == '.')
-                short_path += std::string(".") + str[1];
-            else {
-                short_path += str[0];
+    std::stringstream ss;
+
+    bool last_was_slash = true;
+    for (auto iter = path.begin(); iter != path.end(); ++iter) {
+        char& c = *iter;
+        if (c == '/') {
+            // is this the end of the string?
+            if (iter == path.end() - 1) {
+                // we're done (ignore trailing '/')
+                break;
+            } else {
+                // note that the last char was a slash
+                // }
+                last_was_slash = true;
             }
-            short_path += "/";
+        } else if (last_was_slash) {
+            // we're at a char after a slash
+            // check if there's more slashes
+            if (path.begin() + path.rfind('/') > iter) {
+                // yes more slashes
+                if (iter != path.begin()) {
+                    ss << '/';
+                }
+                ss << c;
+                last_was_slash = false;
+            } else {
+                // no more slashes, add everything and break
+                ss << "/" << iter.base();
+                break;
+            }
         }
     }
-    std::cout << short_path;
+    return ss.str();
 }
 
-static std::vector<std::string> split(const std::string& str, char c) {
-    std::vector<std::string> parts;
-    std::string              current_part;
-    for (std::size_t i = 0; i < str.size(); ++i) {
-        if (str[i] == c) {
-            parts.push_back(current_part);
-            current_part.clear();
-        } else {
-            current_part += str[i];
-        }
-    }
-    parts.push_back(current_part);
-    return parts;
-}
