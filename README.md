@@ -71,7 +71,7 @@ If you want to contribute, there are several things you can do which I always gr
 
 - [ ] Optionally accept a path as argument, otherwise behave as usual
 - [ ] Behave sanely if HOME isn't set
-- [ ] (C++) Speed up `split`
+- [x] (C++) Speed up `split`
 
 ## .bashrc
 
